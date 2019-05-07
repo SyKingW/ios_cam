@@ -24,6 +24,7 @@
 #import "CameraListMgt.h"
 #import "CustomToolBar.h"
 #import "VSNetProtocol.h"
+#import "vsFisheye.h"
 
 @interface PlayViewController : UIViewController <UINavigationBarDelegate,FPPopoverControllerDelegate,PopupListComponentDelegate,UIScrollViewDelegate,CustomToolBarItemDelegate,VSNetDataProtocol,VSNetStatueProtocol,VSNetControlProtocol>
 {
@@ -119,6 +120,8 @@
     id<NotifyEventProtocol> RecNotifyDelegate;
     
     MyGLViewController *myGLViewController;
+    FisheyeView* fishView;         //C60摄像机
+    FisheyeC61SView *fishC61SView; //C61s摄像机
     
     int m_videoFormat;
     

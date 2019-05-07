@@ -44,6 +44,7 @@ PPPPStatusConnecting = "正在连接";
 PPPPStatusInitialing = "正在初始化";
 PPPPStatusOnline = "在线";
 PPPPStatusConnectFailed = "连接失败";
+PPPPStatusInvaliduserpwd = "密码错误";
 PPPPStatusDisconnected = "连接断开";
 PPPPStatusInvalidID = "无效ID";
 PleaseInputCamreraName = "请输入摄像机名称";

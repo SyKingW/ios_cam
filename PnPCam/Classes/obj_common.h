@@ -80,5 +80,12 @@ typedef struct _STRU_DATA_HEAD
     int timestamp;
 }STRU_DATA_HEAD,*PSTRU_DATA_HEAD;
 
+typedef enum {
+    CorrectModelD93 = 2,
+    CorrectModelC60 = 3,
+    CorrectModelC61S = 4,
+    CorrectModelOther = 5,
+}FactoryParamCorrectModel;
 
+#define FactoryParamCorrectModelTag "FactoryParamCorrectModel"
 

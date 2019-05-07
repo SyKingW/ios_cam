@@ -23,7 +23,7 @@
                         timeZone:(NSInteger) tz
                              npt:(NSInteger) ntp
                        netServer:(NSString*)server
-{
+{ 
     
     NSString*  cmd = nil;
     if (now)

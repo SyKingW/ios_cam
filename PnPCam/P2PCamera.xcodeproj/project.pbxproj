@@ -136,7 +136,6 @@
 		4A1EB51C1E4B13FB00EABDA8 /* WeekButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1EB51B1E4B13FB00EABDA8 /* WeekButton.m */; };
 		4A1EB51E1E4B1CD900EABDA8 /* PlayViewHandleBgImageView@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A1EB51D1E4B1CD900EABDA8 /* PlayViewHandleBgImageView@2x.png */; };
 		4A46B8521E4C375300B824FD /* MotionPushPlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A46B8511E4C375300B824FD /* MotionPushPlanViewController.m */; };
-		4AEA12BA1CBDF92200A3D6DB /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AEA12B91CBDF92200A3D6DB /* libbz2.tbd */; };
 		4AEA12BC1CBDFC0200A3D6DB /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AEA12BB1CBDFC0200A3D6DB /* libz.tbd */; };
 		4AEA12BE1CBDFC3600A3D6DB /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AEA12BD1CBDFC3600A3D6DB /* libsqlite3.tbd */; };
 		4AEA12C01CBDFC5C00A3D6DB /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AEA12BF1CBDFC5C00A3D6DB /* libiconv.tbd */; };
@@ -144,10 +143,12 @@
 		6C07506E217DEF0B00E63073 /* PushCameraCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C07506B217DEF0B00E63073 /* PushCameraCell.xib */; };
 		6C260CFD217EB9570010BDE2 /* CameraPushViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C260CFC217EB9570010BDE2 /* CameraPushViewController.m */; };
 		6C260D02217F30610010BDE2 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C260D01217F30610010BDE2 /* UserNotifications.framework */; };
+		6C2F0AF8226EACE900205018 /* libvsFisheye.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2F0AF6226EACE900205018 /* libvsFisheye.a */; };
 		6C35055421805F2300D17E87 /* VSNetAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C260CFE217F1A170010BDE2 /* VSNetAPI.framework */; };
 		6C35055D21806CAE00D17E87 /* MessageCameraCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C35055A21806CAD00D17E87 /* MessageCameraCell.m */; };
 		6C35055E21806CAE00D17E87 /* MessageCameraCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C35055C21806CAE00D17E87 /* MessageCameraCell.xib */; };
 		6C3505612180713400D17E87 /* CameraMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3505602180713400D17E87 /* CameraMessageViewController.m */; };
+		6C57C16721BA64B100DE9CCD /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AEA12B91CBDF92200A3D6DB /* libbz2.tbd */; };
 		6C933D3A2181BE5D0093AAF9 /* CustomMessageCameraCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C933D372181BE5C0093AAF9 /* CustomMessageCameraCell.m */; };
 		6C933D3B2181BE5D0093AAF9 /* CustomMessageCameraCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C933D382181BE5C0093AAF9 /* CustomMessageCameraCell.xib */; };
 		83A99C1F1B53A183006A418F /* iCloudLivePFZUIviewQR.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A99C1E1B53A183006A418F /* iCloudLivePFZUIviewQR.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -590,6 +591,8 @@
 		6C260CFE217F1A170010BDE2 /* VSNetAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VSNetAPI.framework; sourceTree = "<group>"; };
 		6C260D00217F275D0010BDE2 /* PNPCam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PNPCam.entitlements; sourceTree = "<group>"; };
 		6C260D01217F30610010BDE2 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		6C2F0AF6226EACE900205018 /* libvsFisheye.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libvsFisheye.a; sourceTree = "<group>"; };
+		6C2F0AF7226EACE900205018 /* vsFisheye.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vsFisheye.h; sourceTree = "<group>"; };
 		6C35055A21806CAD00D17E87 /* MessageCameraCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCameraCell.m; sourceTree = "<group>"; };
 		6C35055B21806CAE00D17E87 /* MessageCameraCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCameraCell.h; sourceTree = "<group>"; };
 		6C35055C21806CAE00D17E87 /* MessageCameraCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCameraCell.xib; sourceTree = "<group>"; };
@@ -938,14 +941,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C57C16721BA64B100DE9CCD /* libbz2.tbd in Frameworks */,
 				6C35055421805F2300D17E87 /* VSNetAPI.framework in Frameworks */,
+				6C2F0AF8226EACE900205018 /* libvsFisheye.a in Frameworks */,
 				6C260D02217F30610010BDE2 /* UserNotifications.framework in Frameworks */,
 				9CD216B72154BDDE00EB72A6 /* libstdc++.tbd in Frameworks */,
 				9C1CEB6C20D36EBF00086231 /* AssetsLibrary.framework in Frameworks */,
 				4AEA12C01CBDFC5C00A3D6DB /* libiconv.tbd in Frameworks */,
 				4AEA12BE1CBDFC3600A3D6DB /* libsqlite3.tbd in Frameworks */,
 				4AEA12BC1CBDFC0200A3D6DB /* libz.tbd in Frameworks */,
-				4AEA12BA1CBDF92200A3D6DB /* libbz2.tbd in Frameworks */,
 				FDE428FC16B7AB6900ACC2C4 /* SystemConfiguration.framework in Frameworks */,
 				B7E4A4B216704E1E002E9D2B /* OpenGLES.framework in Frameworks */,
 				B7E4A4B016704E18002E9D2B /* GLKit.framework in Frameworks */,
@@ -1375,6 +1379,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				6C2F0AF5226EACE900205018 /* VSFisheye */,
 				6C260D00217F275D0010BDE2 /* PNPCam.entitlements */,
 				FD3ED9C91B2E740A00E4E155 /* SytemUpgrade */,
 				FDFF57A61784218600DFA5D9 /* RecordTimeMode */,
@@ -1447,6 +1452,15 @@
 				4AEA12BD1CBDFC3600A3D6DB /* libsqlite3.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6C2F0AF5226EACE900205018 /* VSFisheye */ = {
+			isa = PBXGroup;
+			children = (
+				6C2F0AF6226EACE900205018 /* libvsFisheye.a */,
+				6C2F0AF7226EACE900205018 /* vsFisheye.h */,
+			);
+			path = VSFisheye;
 			sourceTree = "<group>";
 		};
 		9C440C6820C4DAEC00A0DACC /* VSNet */ = {
@@ -1802,7 +1816,6 @@
 				LastUpgradeCheck = 0430;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = 9XGDE5JWD8;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -2260,7 +2273,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = 9XGDE5JWD8;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2286,6 +2299,7 @@
 					"\"$(SRCROOT)/Release-iphoneos\"",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/VSNet/lib",
+					"$(PROJECT_DIR)/VSFisheye",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vstarcam.p2pdemo;
@@ -2309,7 +2323,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = 9XGDE5JWD8;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2337,6 +2351,7 @@
 					"\"$(SRCROOT)/Release-iphoneos\"",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/VSNet/lib",
+					"$(PROJECT_DIR)/VSFisheye",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vstarcam.p2pdemo;
@@ -2360,7 +2375,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = 9XGDE5JWD8;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2386,6 +2401,7 @@
 					"\"$(SRCROOT)/Release-iphoneos\"",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/VSNet/lib",
+					"$(PROJECT_DIR)/VSFisheye",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vstarcam.p2pdemo;

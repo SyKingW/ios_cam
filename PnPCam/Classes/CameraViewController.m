@@ -19,6 +19,7 @@
 
 #import "VSNet.h"
 #include "cmdhead.h"
+#import "APICommon.h"
 
 @interface CameraViewController()
 @property (nonatomic, retain) CustomTableAlert* customTalert;
@@ -260,7 +261,7 @@
 - (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section
 {
     int count = [cameraListMgt GetCount];
-    return count + 3;
+    return count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)anIndexPath
@@ -1067,6 +1068,14 @@
             int Camindex = [cameraListMgt GetIndexFromDID:deviceIdentity];
             [self performSelectorOnMainThread:@selector(ReloadRowDataAtIndex:) withObject:[NSNumber numberWithInt:Camindex] waitUntilDone:NO];
         }
+        
+        if(status == 2){
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSString *strCMD = @"get_factory_param.cgi?";
+                 [[VSNet shareinstance] sendCgiCommand:strCMD withIdentity:deviceIdentity];
+            });
+        }
+        
         //如果是ID号无效，则停止该设备的P2P
         if (status == PPPP_STATUS_INVALID_ID 
             || status == PPPP_STATUS_CONNECT_TIMEOUT
@@ -1149,10 +1158,23 @@
 {
     NSLog(@"CameraViewController VSNet返回数据 UID:%@ comtype %ld",deviceIdentity,(long)comType);
     switch (comType) {
-        case CGI_IESET_SNAPSHOT:
-        {
+        case CGI_IESET_SNAPSHOT:{
             NSData *image = [[NSData alloc] initWithBytes:buffer length:length];
             [self SnapshotCallback:image UID:deviceIdentity];
+            break;
+        }
+        case CGI_IEGET_FACTORY:{
+            NSInteger installType = [[APICommon stringAnalysisWithFormatStr:@"installType=" AndRetString:retString] integerValue];
+            NSInteger correctModel = [[APICommon stringAnalysisWithFormatStr:@"correctModel=" AndRetString:retString] integerValue];
+            
+            if (installType == 1 && correctModel == 1) {
+                [[NSUserDefaults standardUserDefaults] setObject:@(CorrectModelC60) forKey:[NSString stringWithFormat:@"%@%@",deviceIdentity,@FactoryParamCorrectModelTag]];
+            }else if (correctModel == 2){
+                [[NSUserDefaults standardUserDefaults] setObject:@(CorrectModelC61S) forKey:[NSString stringWithFormat:@"%@%@",deviceIdentity,@FactoryParamCorrectModelTag]];
+            } else {
+                [[NSUserDefaults standardUserDefaults] setObject:@(CorrectModelOther) forKey:[NSString stringWithFormat:@"%@%@",deviceIdentity,@FactoryParamCorrectModelTag]];
+            }
+            [[NSUserDefaults standardUserDefaults] synchronize];
             break;
         }
         default:

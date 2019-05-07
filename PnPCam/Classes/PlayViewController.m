@@ -364,8 +364,10 @@
         
         NSString* strBasePath = [self GetBasePath:strDID];
         NSString* fileName = [strBasePath stringByAppendingPathComponent:@"test22.mp4"];
+        NSLog(@"fileName %@",fileName);
         if (fileName != nil) {
             [[VSNet shareinstance] StartRecord:fileName cameraUid:strDID completion:^(BOOL success, int nError) {
+                NSLog(@"fileName  error%d",nError);
                 if (success) {
                     NSLog(@"Record success");
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -1702,7 +1704,8 @@
         imageBg.frame = imgView.frame;
         self.disPlayScrollView.frame = imgView.frame;
         // NSLog(@"imageBg.frame  %@",NSStringFromCGRect(imageBg.frame));
-        myGLViewController.view.frame = imgView.frame;
+        if(myGLViewController)
+            myGLViewController.view.frame = imgView.frame;
         if (fppoverCtr != nil) {
             fppoverCtr.contentSize = CGSizeMake(210, 290);
         }
@@ -1753,7 +1756,8 @@
         self.subDisplayScrollView.contentSize = CGSizeMake(m_nScreenHeight, m_nScreenHeight*3/4);
         NSLog(@"self.subDisplayScrollView.contentSize  %@",NSStringFromCGSize(self.subDisplayScrollView.contentSize));
         imgView.frame = CGRectMake(0, 0, m_nScreenHeight, m_nScreenHeight*/*m_nScreenHeight/m_nScreenWidth*/3/4);
-        myGLViewController.view.frame = imgView.frame;
+        if(myGLViewController)
+            myGLViewController.view.frame = imgView.frame;
         self.cameramarkimgView.frame = CGRectMake(5.f, self.subDisplayScrollView.frame.origin.y + self.subDisplayScrollView.frame.size.height - self.cameramarkimgView.frame.size.height - 5.f, self.cameramarkimgView.frame.size.width, self.cameramarkimgView.frame.size.height);
         
         if (m_bToolBarShow) {
@@ -1820,7 +1824,8 @@
         imageBg.frame = imgView.frame;
         self.disPlayScrollView.frame = imgView.frame;
         // NSLog(@"imageBg.frame  %@",NSStringFromCGRect(imageBg.frame));
-        myGLViewController.view.frame = imgView.frame;
+        if(myGLViewController)
+            myGLViewController.view.frame = imgView.frame;
         if (fppoverCtr != nil) {
             fppoverCtr.contentSize = CGSizeMake(210, 290);
         }
@@ -1872,7 +1877,8 @@
         self.subDisplayScrollView.frame = CGRectMake(0, m_nScreenWidth/2-m_nScreenHeight*/*m_nScreenHeight/m_nScreenWidth*/3/4/2, m_nScreenHeight, m_nScreenHeight*/*m_nScreenHeight/m_nScreenWidth*/3/4);
         self.subDisplayScrollView.contentSize = CGSizeMake(m_nScreenHeight, m_nScreenHeight*3/4);
         imgView.frame = CGRectMake(0, 0, m_nScreenHeight, m_nScreenHeight*/*m_nScreenHeight/m_nScreenWidth*/3/4);
-        myGLViewController.view.frame = imgView.frame;
+        if(myGLViewController)
+            myGLViewController.view.frame = imgView.frame;
         self.cameramarkimgView.frame = CGRectMake(5.f, self.subDisplayScrollView.frame.origin.y + self.subDisplayScrollView.frame.size.height - self.cameramarkimgView.frame.size.height - 5.f, self.cameramarkimgView.frame.size.width, self.cameramarkimgView.frame.size.height);
         
         if (m_bToolBarShow) {
@@ -1935,24 +1941,46 @@
     if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
         self.subDisplayScrollView.frame = CGRectMake(0, 0, m_nScreenWidth, m_nScreenHeight);
         imgView.frame = CGRectMake(0, 0, m_nScreenWidth, m_nScreenHeight);
-        myGLViewController.view.frame = imgView.frame;
+        if(myGLViewController)
+            myGLViewController.view.frame = imgView.frame;
     }else{
         self.subDisplayScrollView.frame = CGRectMake(0, m_nScreenWidth/2-m_nScreenHeight*/*m_nScreenHeight/m_nScreenWidth*/3/4/2, m_nScreenHeight, m_nScreenHeight*/*m_nScreenHeight/m_nScreenWidth*/3/4);
         imgView.frame = CGRectMake(0, 0, m_nScreenHeight, m_nScreenHeight*/*m_nScreenHeight/m_nScreenWidth*/3/4);
-        myGLViewController.view.frame = imgView.frame;//[[UIScreen mainScreen] bounds];
+        if(myGLViewController)
+            myGLViewController.view.frame = imgView.frame;//[[UIScreen mainScreen] bounds];
     }
 }
 
 - (void) CreateGLView
 {
-    myGLViewController = [[MyGLViewController alloc] init];
-    if ([[UIApplication sharedApplication] statusBarOrientation]== UIInterfaceOrientationLandscapeLeft || [[UIApplication sharedApplication] statusBarOrientation]== UIInterfaceOrientationLandscapeRight) {
-        myGLViewController.view.frame = imgView.frame;//CGRectMake(0, 0, m_nScreenWidth, m_nScreenHeight);
-    }else{
-        myGLViewController.view.frame = imgView.frame;//CGRectMake(0, 224, 768, 576);
+    NSInteger correctModel = [[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@%@",strDID,@FactoryParamCorrectModelTag]] integerValue];
+    
+    if(correctModel == CorrectModelC60){
+        fishView = [[FisheyeView alloc] initWithFrame:imgView.frame Type:DEVICE_TYPE_B];
+        [fishView setBackgroundColor:[UIColor blackColor]];
+        fishView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [[VSNet shareinstance] setCameraIsPanorama:YES withUid:strDID];
+    }
+    else if (correctModel == CorrectModelC61S){
+        fishC61SView = [[FisheyeC61SView alloc] initWithFrame:imgView.frame Type:VIEW_TYPE_ONE];
+        [fishC61SView setBackgroundColor:[UIColor blackColor]];
+        fishC61SView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [[VSNet shareinstance] setCameraIsPanorama:YES withUid:strDID];
+    }
+    else{
+        myGLViewController = [[MyGLViewController alloc] init];
+        myGLViewController.view.frame = imgView.frame;
     }
     
-    [self.subDisplayScrollView addSubview:myGLViewController.view];
+    if(myGLViewController)
+        [self.subDisplayScrollView addSubview:myGLViewController.view];
+    
+    if(fishView)
+        [self.subDisplayScrollView addSubview:fishView];
+    
+    if(fishC61SView)
+        [self.subDisplayScrollView addSubview:fishC61SView];
+    
     [self.view bringSubviewToFront:timeoutLabel];
     [self.view bringSubviewToFront:OSDLabel];
     [self.view bringSubviewToFront:TimeStampLabel];
@@ -1963,10 +1991,12 @@
     [self.view bringSubviewToFront:sliderBrightness];
     [self.view bringSubviewToFront:labelBrightness];
     
-    [myGLViewController.view addSubview:self.imageDown];
-    [myGLViewController.view addSubview:self.imageUp];
-    [myGLViewController.view addSubview:self.imageLeft];
-    [myGLViewController.view addSubview:self.imageRight];
+    if(myGLViewController){
+        [myGLViewController.view addSubview:self.imageDown];
+        [myGLViewController.view addSubview:self.imageUp];
+        [myGLViewController.view addSubview:self.imageLeft];
+        [myGLViewController.view addSubview:self.imageRight];
+    }
     
     [self.view bringSubviewToFront:self.imageDown];
     [self.view bringSubviewToFront:self.imageLeft];
@@ -2069,14 +2099,28 @@
         self.subDisplayScrollView.frame = CGRectMake(0, 0, m_nScreenWidth, m_nScreenHeight);
         imgView.frame = CGRectMake(0, 0, m_nScreenWidth, m_nScreenHeight);
         imageBg.frame = imgView.frame;
-        myGLViewController.view.frame = imgView.frame;
+        if(myGLViewController)
+            myGLViewController.view.frame = imgView.frame;
+        
+        if(fishView)
+            fishView.frame = imgView.frame;
+        
+        if(fishC61SView)
+            fishC61SView.frame = imgView.frame;
         [UIApplication sharedApplication].statusBarHidden = YES;
     }else{
         [UIApplication sharedApplication].statusBarHidden = YES;
         imageBg.frame = [[UIScreen mainScreen] bounds];
         self.subDisplayScrollView.frame = CGRectMake(0, m_nScreenWidth/2-m_nScreenHeight*/*m_nScreenHeight/m_nScreenWidth*/3/4/2, m_nScreenHeight, m_nScreenHeight*/*m_nScreenHeight/m_nScreenWidth*/3/4);
         imgView.frame = CGRectMake(0.f, 0.f, m_nScreenHeight, m_nScreenHeight*/*m_nScreenHeight/m_nScreenWidth*/3/4);
-        myGLViewController.view.frame = imgView.frame;
+        if(myGLViewController)
+            myGLViewController.view.frame = imgView.frame;
+        
+        if(fishView)
+            fishView.frame = imgView.frame;
+        
+        if(fishC61SView)
+            fishC61SView.frame = imgView.frame;
     }
     imageBg.backgroundColor = [UIColor colorWithRed:100.0/255 green:100.0/255 blue:100.0/255 alpha:0.5];
     imageBg.userInteractionEnabled = YES;
@@ -2584,6 +2628,17 @@
     //SAFE_DELETE(m_pYUVData);
     if(m_pYUVData)
         free(m_pYUVData);
+    
+    if(fishView){
+        [fishView FreeObject];
+        fishView = nil;
+    }
+    
+    if(fishC61SView){
+        [fishC61SView FreeObject];
+        fishC61SView = nil;
+    }
+    
     [super dealloc];
     
 }
@@ -2681,7 +2736,48 @@
     }
 }
 
+//视频数据
+- (void) VSNetHardH264Data: (NSString*) deviceIdentity data:(CVPixelBufferRef ) pixeBuffer time:(NSUInteger)timestame origenelLen:(NSInteger) oLen
+{
+    if ([deviceIdentity isEqualToString:strDID] == NO) {
+        return;
+    }
+    
+    if (bPlaying == NO)
+    {
+        [self performSelectorOnMainThread:@selector(CreateGLView) withObject:nil waitUntilDone:YES];
+        [self updataResolution:(int)CVPixelBufferGetWidth(pixeBuffer) height:(int)CVPixelBufferGetHeight(pixeBuffer)];
+        [self performSelectorOnMainThread:@selector(hideProgress:) withObject:nil waitUntilDone:NO];
+        bPlaying = YES;
+    }
+    
+    if (m_videoFormat == -1) {
+        m_videoFormat = 2;
+        [self performSelectorOnMainThread:@selector(enableButton) withObject:nil waitUntilDone:NO];
+    }
+    
+    
+    dispatch_async(dispatch_get_main_queue(),^{
+        CVPixelBufferLockBaseAddress(pixeBuffer, 0);
+        if(fishView){
+            [fishView display:CVPixelBufferGetBaseAddressOfPlane(pixeBuffer,0)
+                                   u:CVPixelBufferGetBaseAddressOfPlane(pixeBuffer,1)
+                                   v:CVPixelBufferGetBaseAddressOfPlane(pixeBuffer,2)
+                                Size:CGSizeMake((int)CVPixelBufferGetWidth(pixeBuffer), CVPixelBufferGetHeight(pixeBuffer))];
+        }
+        
+        if(fishC61SView)
+            [fishC61SView display:CVPixelBufferGetBaseAddressOfPlane(pixeBuffer,0)
+                            u:CVPixelBufferGetBaseAddressOfPlane(pixeBuffer,1)
+                            v:CVPixelBufferGetBaseAddressOfPlane(pixeBuffer,2)
+                         Size:CGSizeMake((int)CVPixelBufferGetWidth(pixeBuffer), CVPixelBufferGetHeight(pixeBuffer))];
+        
+        CVPixelBufferUnlockBaseAddress(pixeBuffer, 0);
+        CVPixelBufferRelease(pixeBuffer);
+    });
+}
 
+//视频数据
 - (void) VSNetYuvData: (NSString*) deviceIdentity data:(Byte *) buff withLen:(NSInteger)len
                height:(NSInteger)height width:(NSInteger)width time:(NSUInteger)timestame origenelLen:(NSInteger) oLen
 
@@ -2704,8 +2800,10 @@
     }
     
     //[self performSelectorOnMainThread:@selector(updateTimestamp) withObject:nil waitUntilDone:NO];
-    [myGLViewController WriteYUVFrame:buff Len:(int)len width:(int)width height:(int)height];
+    if(myGLViewController)
+        [myGLViewController WriteYUVFrame:buff Len:(int)len width:(int)width height:(int)height];
     
+ 
     [m_YUVDataLock lock];
     if (m_pYUVData) {
         free(m_pYUVData);
